@@ -1,0 +1,41 @@
+services:
+  mysqldb:   
+    image: mysql:8
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root  
+      MYSQL_DATABASE: examdb205
+    ports: 
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - springboot-mysql-net
+
+  backend:
+    image : ruchithavemula11/2300032021-exam-backend:latest
+    container_name: backend
+    ports:
+      - "2025:2000"
+    depends_on:
+      - mysqldb
+    restart: on-failure
+    networks:
+      - springboot-mysql-net
+
+  frontend:
+    image: ruchithavemula11/2300032021-exam-frontend:latest
+    container_name: frontend
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
+    restart: on-failure
+    networks:
+      - springboot-mysql-net
+
+volumes:
+  mysql_data:
+
+networks:
+  springboot-mysql-net:
