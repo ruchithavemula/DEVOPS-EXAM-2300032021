@@ -14,7 +14,7 @@ services:
 
   backend:
     image : ruchithavemula11/2300032021-exam-backend:latest
-    container_name: backend
+    container_name: voter-backend
     ports:
       - "2025:2000"
     depends_on:
@@ -25,7 +25,7 @@ services:
 
   frontend:
     image: ruchithavemula11/2300032021-exam-frontend:latest
-    container_name: frontend
+    container_name: voter-frontend
     ports:
       - "3001:80"
     depends_on:
